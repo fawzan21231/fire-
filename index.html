@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolKit - Tools & PDF Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #2c3e50, #4CAF50);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #3e8e41;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            font-size: 36px;
+            color: #2c3e50;
+        }
+        
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .tool-icon {
+            font-size: 60px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .tool-content h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        
+        .pdf-resources {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0;
+            border-radius: 10px;
+        }
+        
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .pdf-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .pdf-card i {
+            font-size: 50px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .pdf-card h3 {
+            margin-bottom: 15px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature i {
+            font-size: 50px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        footer {
+            background: #1a2530;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .tool-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .tool-interface {
+            margin-top: 20px;
+        }
+        
+        .tool-interface h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .tool-output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-tools"></i>
+                    <span>ToolKit</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Tools</a></li>
+                    <li><a href="#">PDF Resources</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Powerful Tools & PDF Resources</h1>
+            <p>Discover the best tools and PDF resources to enhance your productivity and workflow</p>
+            <a href="#" class="btn">Explore Resources</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Featured Tools</h2>
+        <div class="tools">
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div class="tool-content">
+                    <h3>PDF Master Pro</h3>
+                    <p>Edit, merge, split, and convert PDF files with our powerful online tool. No installation required.</p>
+                    <button class="btn use-tool" data-tool="pdf-tool">Use Tool</button>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="tool-content">
+                    <h3>File Converter</h3>
+                    <p>Convert between various file formats including PDF, Word, Excel, JPG, and more.</p>
+                    <button class="btn use-tool" data-tool="converter-tool">Use Tool</button>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-scanner"></i>
+                </div>
+                <div class="tool-content">
+                    <h3>Smart Scanner</h3>
+                    <p>Turn your device into a powerful scanner. Capture documents and save them as PDF.</p>
+                    <button class="btn use-tool" data-tool="scanner-tool">Use Tool</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="pdf-resources">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">PDF Resources</h2>
+            <div class="pdf-grid">
+                <div class="pdf-card">
+                    <i class="fas fa-book"></i>
+                    <h3>PDF Guides</h3>
+                    <p>Comprehensive guides to help you master PDF creation, editing, and management.</p>
+                    <a href="#" class="btn">Download</a>
+                </div>
+                
+                <div class="pdf-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Templates</h3>
+                    <p>Professional PDF templates for resumes, invoices, reports, and more.</p>
+                    <a href="#" class="btn">Download</a>
+                </div>
+                
+                <div class="pdf-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Tutorials</h3>
+                    <p>Step-by-step tutorials to help you get the most out of our tools and resources.</p>
+                    <a href="#" class="btn">Download</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Why Choose Our Tools</h2>
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-lock"></i>
+                <h3>Secure & Private</h3>
+                <p>All file processing happens directly in your browser. Your files never leave your computer.</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <h3>Fast Processing</h3>
+                <p>Our tools are optimized for speed, allowing you to process files in seconds.</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>Free to Use</h3>
+                <p>All our basic tools are completely free with no hidden costs or subscriptions.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ToolKit - All Rights Reserved</p>
+            <p>Your ultimate destination for tools and PDF resources</p>
+        </div>
+    </footer>
+
+    <!-- Tool Modals -->
+    <div class="tool-modal" id="pdf-tool-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>PDF Master Pro</h2>
+            <p>Edit your PDF files with our powerful tool</p>
+            
+            <div class="tool-interface">
+                <h3>Upload PDF File</h3>
+                <div class="input-group">
+                    <label for="pdf-upload">Select a PDF file</label>
+                    <input type="file" id="pdf-upload" accept=".pdf">
+                </div>
+                
+                <h3>Select Action</h3>
+                <div class="input-group">
+                    <label for="pdf-action">What would you like to do?</label>
+                    <select id="pdf-action">
+                        <option value="extract">Extract Pages</option>
+                        <option value="merge">Merge PDFs</option>
+                        <option value="compress">Compress PDF</option>
+                        <option value="convert">Convert to Word</option>
+                    </select>
+                </div>
+                
+                <button class="btn" id="process-pdf">Process PDF</button>
+                
+                <div class="tool-output" id="pdf-output">
+                    <h4>Processing Complete</h4>
+                    <p>Your PDF has been processed successfully.</p>
+                    <button class="btn">Download Result</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-modal" id="converter-tool-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>File Converter</h2>
+            <p>Convert between different file formats</p>
+            
+            <div class="tool-interface">
+                <div class="input-group">
+                    <label for="source-file">Select file to convert</label>
+                    <input type="file" id="source-file">
+                </div>
+                
+                <div class="input-group">
+                    <label for="convert-format">Convert to format</label>
+                    <select id="convert-format">
+                        <option value="pdf">PDF</option>
+                        <option value="docx">Word Document</option>
+                        <option value="xlsx">Excel Spreadsheet</option>
+                        <option value="jpg">JPG Image</option>
+                        <option value="png">PNG Image</option>
+                    </select>
+                </div>
+                
+                <button class="btn" id="convert-file">Convert File</button>
+                
+                <div class="tool-output" id="converter-output">
+                    <h4>Conversion Complete</h4>
+                    <p>Your file has been converted successfully.</p>
+                    <button class="btn">Download Converted File</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-modal" id="scanner-tool-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Smart Scanner</h2>
+            <p>Scan documents using your device camera</p>
+            
+            <div class="tool-interface">
+                <div class="input-group">
+                    <label for="scan-quality">Scan Quality</label>
+                    <select id="scan-quality">
+                        <option value="low">Low (Smaller File)</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High (Better Quality)</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="scan-mode">Scan Mode</label>
+                    <select id="scan-mode">
+                        <option value="document">Document</option>
+                        <option value="photo">Photo</option>
+                        <option value="text">Text Only</option>
+                    </select>
+                </div>
+                
+                <div id="camera-container" style="margin: 20px 0; text-align: center;">
+                    <p>Camera access required for scanning</p>
+                    <button class="btn" id="start-camera">Start Camera</button>
+                </div>
+                
+                <button class="btn" id="capture-scan">Capture Scan</button>
+                
+                <div class="tool-output" id="scanner-output">
+                    <h4>Scan Complete</h4>
+                    <p>Your document has been scanned successfully.</p>
+                    <button class="btn">Download Scanned PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tool Modal Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const toolButtons = document.querySelectorAll('.use-tool');
+            const modals = document.querySelectorAll('.tool-modal');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            
+            // Open modal when tool button is clicked
+            toolButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const toolId = this.getAttribute('data-tool');
+                    const modal = document.getElementById(`${toolId}-modal`);
+                    if (modal) {
+                        modal.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+            
+            // Close modal when close button is clicked
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('.tool-modal');
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Close modal when clicking outside of modal content
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+            
+            // Simulate processing for PDF tool
+            const processPdfBtn = document.getElementById('process-pdf');
+            if (processPdfBtn) {
+                processPdfBtn.addEventListener('click', function() {
+                    const output = document.getElementById('pdf-output');
+                    output.style.display = 'block';
+                });
+            }
+            
+            // Simulate conversion for converter tool
+            const convertFileBtn = document.getElementById('convert-file');
+            if (convertFileBtn) {
+                convertFileBtn.addEventListener('click', function() {
+                    const output = document.getElementById('converter-output');
+                    output.style.display = 'block';
+                });
+            }
+            
+            // Simulate scanning for scanner tool
+            const captureScanBtn = document.getElementById('capture-scan');
+            if (captureScanBtn) {
+                captureScanBtn.addEventListener('click', function() {
+                    const output = document.getElementById('scanner-output');
+                    output.style.display = 'block';
+                });
+            }
+            
+            // Simulate camera start
+            const startCameraBtn = document.getElementById('start-camera');
+            if (startCameraBtn) {
+                startCameraBtn.addEventListener('click', function() {
+                    this.innerText = 'Camera Active';
+                    this.style.backgroundColor = '#3e8e41';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
